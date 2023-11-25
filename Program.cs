@@ -34,13 +34,15 @@ var app = builder.Build();
 app.MapGet("/", () => {
     try
     {
-        SavingsAcount myAccount = new SavingsAcount(300);
-        return Results.Ok(myAccount.getBalance());
+        Console.WriteLine("looking for banks!");
+        SavingsAcount myAccount = new SavingsAcount("Todd Alberto",300);
+        return Results.Ok($"Your balance is ${myAccount.getBalance()}");
         
     } catch (Exception ex) {
 
-        return Results.Exception(ex.Message);
         Console.WriteLine($"We got an error: {ex.Message}");
+        return Results.Ok(ex.Message);
+        
     }
 });
 
